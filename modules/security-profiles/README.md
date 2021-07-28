@@ -192,9 +192,9 @@ provider "panos" {
   password = "<admin_password>"
 }
 
-module "security-profiles" {
-  source = "sarah-blazic/security-profiles/panos"
-  version = "0.1.2"
+module "policy-as-code_security-profiles" {
+  source  = "sarah-blazic/policy-as-code/panos//modules/security-profiles"
+  version = "0.1.0"
 
   #for JSON files: try(jsondecode(file("<*.json>")), {})
   #for YAML files: try(yamldecode(file("<*.yaml>")), {})

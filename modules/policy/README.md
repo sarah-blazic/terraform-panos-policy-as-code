@@ -204,9 +204,9 @@ provider "panos" {
   password = "<admin_password>"
 }
 
-module "policy" {
-  source = "sarah-blazic/policy/panos"
-  version = "0.1.3"
+module "policy-as-code_policy" {
+  source  = "sarah-blazic/policy-as-code/panos//modules/policy"
+  version = "0.1.0"
 
   #for JSON examples: try(jsondecode(file("<*.json>")), {})
   #for YAML examples: try(yamldecode(file("<*.yaml>")), {})
