@@ -4,20 +4,11 @@
     "rule": [
       {
         "name": "Alert-All",
-        "applications": [
-          "any"
-        ],
-        "file_types": [
-          "any"
-        ],
         "direction": "both",
         "action": "alert"
       },
       {
         "name": "Block",
-        "applications": [
-          "any"
-        ],
         "file_types": [
           "7z",
           "bat",
@@ -45,20 +36,11 @@
     "rule": [
       {
         "name": "Alert-All",
-        "applications": [
-          "any"
-        ],
-        "file_types": [
-          "any"
-        ],
         "direction": "both",
         "action": "alert"
       },
       {
         "name": "Block",
-        "applications": [
-          "any"
-        ],
         "file_types": [
           "7z",
           "bat",
@@ -86,20 +68,11 @@
     "rule": [
       {
         "name": "Alert-All",
-        "applications": [
-          "any"
-        ],
-        "file_types": [
-          "any"
-        ],
         "direction": "both",
         "action": "alert"
       },
       {
         "name": "Block",
-        "applications": [
-          "any"
-        ],
         "file_types": [
           "7z",
           "bat",
@@ -127,12 +100,6 @@
     "rule": [
       {
         "name": "Alert-Only",
-        "applications": [
-          "any"
-        ],
-        "file_types": [
-          "any"
-        ],
         "direction": "both",
         "action": "alert"
       }

@@ -61,19 +61,6 @@ jobs:
       env:
        opa_results: ${{ steps.opa_eval_addr_group.outputs.opa_results }}
 
-    - name: Evaluate OPA Basic Policy w/NAT
-      id: opa_eval_NAT_basic
-      uses: migara/test-action@master
-      with:
-        tests: ./examples/validate/opa/panos.rego
-        policy: ./examples/basic_policy/iron_skillet/nat.json #path to nat security policy file
-
-    - name: Print Results Basic policy nat
-      run: |
-       echo $opa_results | jq -r '.result[].expressions[].value'
-      env:
-       opa_results: ${{ steps.opa_eval_NAT_basic.outputs.opa_results }}
-
     - name: Evaluate OPA json example w/NAT
       id: opa_eval_NAT
       uses: migara/test-action@master

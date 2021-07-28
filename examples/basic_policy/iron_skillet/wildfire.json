@@ -4,12 +4,6 @@
     "rule": [
       {
         "name": "Forward-All",
-        "applications": [
-          "any"
-        ],
-        "file_types": [
-          "any"
-        ],
         "direction": "both",
         "analysis": "public-cloud"
       }
@@ -20,12 +14,6 @@
     "rule": [
       {
         "name": "Forward-All",
-        "applications": [
-          "any"
-        ],
-        "file_types": [
-          "any"
-        ],
         "direction": "both",
         "analysis": "public-cloud"
       }
@@ -36,12 +24,6 @@
     "rule": [
       {
         "name": "Forward-All",
-        "applications": [
-          "any"
-        ],
-        "file_types": [
-          "any"
-        ],
         "direction": "both",
         "analysis": "public-cloud"
       }
@@ -52,12 +34,6 @@
     "rule": [
       {
         "name": "Forward-All",
-        "applications": [
-          "any"
-        ],
-        "file_types": [
-          "any"
-        ],
         "direction": "both",
         "analysis": "public-cloud"
       }
