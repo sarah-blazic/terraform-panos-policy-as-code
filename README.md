@@ -3,6 +3,11 @@
 ## Overview
 
 A set of modules for using **Palo Alto Networks Panorama Policy as Code** to configure your Palo Alto Networks Next Generation Firewalls with code instead of interacting with the GUI. It configures aspects such as Tags, Address Objects/Groups, Security/NAT policies, Security Profiles, and more.
+* Policy as Code executes Terraform that will create a variety of resources based on the input. 
+* Terraform is the underlying automation tool, therefore it utilizes the Terraform provider ecosystem to drive relevant change to the network infrastructure.
+* All Policy as Code is written as a compatible **Terraform module** using resources for the underlying network infrastructure provider.
+
+![PolicyAsCode](https://i.imgur.com/hSWGYuL.png)
 
 ## Structure
 
