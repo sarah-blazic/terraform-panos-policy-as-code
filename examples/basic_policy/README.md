@@ -1,6 +1,6 @@
 Palo Alto Networks Panorama Modules Basic Policy Example
 ---
-This folder shows an example of Terraform code and JSON schemas that deploy iron skillet configurations in the Panorama.
+This folder shows an example of Terraform code and JSON code that deploy iron skillet configurations on the Panorama.
 
 Usage
 ---
