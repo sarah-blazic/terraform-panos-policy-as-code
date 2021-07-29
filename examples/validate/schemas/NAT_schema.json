@@ -129,7 +129,6 @@
                 "uniqueItems": true
               }
             },
-            "required": ["source_zones","destination_zone", "source_addresses", "destination_addresses"],
             "additionalProperties": false
           },
           "translated_packet": {
