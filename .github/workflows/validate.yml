@@ -38,6 +38,12 @@ jobs:
           schema: ./examples/validate/schemas/sec_policy_schema.json
           jsons: ./examples/json_example/json/sec_policy.json,examples/basic_policy/iron_skillet/sec_policy.json  #path to security policy file
 
+      - name: Validate pbf policy JSON
+        uses: nhalstead/validate-json-action@0.1.3
+        with:
+          schema: ./examples/validate/schemas/PBF_schema.json
+          jsons: ./examples/json_example/json/pbf.json
+
       - name: Validate services JSON
         uses: nhalstead/validate-json-action@0.1.3
         with:
