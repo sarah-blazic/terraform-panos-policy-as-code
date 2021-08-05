@@ -47,5 +47,5 @@ terraform.tfvars.json
 *.auto.tfvars.json
 
 #provider
-examples/provider.tf
+provider.tf
 

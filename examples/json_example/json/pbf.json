@@ -1,0 +1,26 @@
+[
+  {
+    "rules": [
+      {
+        "name" : "my-pbf",
+        "description": "deployed by terraform",
+        "source": {
+          "addresses": ["10.50.50.50"],
+          "zones": [
+            "zone1"
+          ],
+          "users": ["any"],
+          "negate": true
+        },
+        "destination": {
+          "addresses": ["10.80.80.80"],
+          "applications": ["any"],
+          "services": ["application-default"]
+        },
+        "forwarding": {
+          "action": "discard"
+        }
+      }
+    ]
+  }
+]

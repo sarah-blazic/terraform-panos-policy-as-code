@@ -1,0 +1,301 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "pbf rule json schema",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "device_group": {
+        "type": "string",
+        "default": "shared",
+        "maxLength": 31,
+        "minLength": 1
+      },
+      "vsys": {
+        "type": "string",
+        "maxLength": 31,
+        "minLength": 1,
+        "default": "vsys1"
+      },
+      "rulebase": {
+        "type": "string",
+        "enum": ["pre-rulebase","post-rulebase"],
+        "default": "pre-rulebase"
+      },
+      "position_keyword": {
+        "type": "string",
+        "enum": ["before","directly before","after","directly after","top","bottom",""],
+        "default": ""
+      },
+      "position_reference": {
+        "$ref": "#/$defs/naming_long"
+      },
+
+     "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "$ref": "#/$defs/naming_long"
+          },
+          "active_active_device_binding": {
+            "type": "string",
+            "enum": ["none","both","0","1"],
+            "default": "none"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1024
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 127,
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "disabled": {
+            "type": "boolean",
+            "default": false
+          },
+          "schedule": {
+            "$ref": "#/$defs/naming"
+          },
+          "uuid": {
+            "type": "string",
+            "pattern": "\\b[0-9a-f]{8}\\b-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-\\b[0-9a-f]{12}\\b"
+          },
+          "target": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "serial": {
+                  "type": "string",
+                  "pattern": "^[0-9]+$"
+                },
+                "vsys_list": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/naming"
+                  },
+                  "uniqueItems": true
+                }
+              },
+              "required": [
+                "serial"
+              ]
+            }
+          },
+          "negate_target": {
+            "type": "boolean",
+            "default": false
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "zones": {
+                "type": "array",
+                "default": ["any"],
+                "items":
+                {
+                  "$ref": "#/$defs/naming"
+                },
+                "uniqueItems": true
+              },
+              "interfaces": {
+                "type": "array",
+                "items" : {
+                  "$ref": "#/$defs/naming"
+                },
+                "uniqueItems": true
+              },
+              "addresses": {
+                "type": "array",
+                "default": ["any"],
+                "items": {
+                  "$ref": "#/$defs/naming_long"
+                },
+                "uniqueItems": true
+              },
+              "users": {
+                "type": "array",
+                "default": ["any"],
+                "items": {
+                  "$ref": "#/$defs/naming_long"
+                },
+                "uniqueItems": true
+              },
+              "negate":{
+                "type": "boolean",
+                "default": false
+              }
+            },
+            "dependencies": {
+              "zones": {
+                "not": {
+                  "required": ["interfaces"]
+                }
+              },
+              "interfaces": {
+                "not": {
+                  "required": ["zones"]
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          "destination": {
+            "type": "object",
+            "properties": {
+              "addresses": {
+                "type": "array",
+                "default": ["any"],
+                "items": {
+                  "$ref": "#/$defs/naming_long"
+                },
+                "uniqueItems": true
+              },
+              "applications": {
+                "type": "array",
+                "default": ["any"],
+                "items": {
+                  "type": "string",
+                  "maxLength": 31,
+                  "pattern": "^[a-zA-z][a-zA-Z0-9_.\\s-]+$"
+                },
+                "uniqueItems": true
+              },
+              "services": {
+                "type": "array",
+                "default": [
+                  "application-default"
+                ],
+                "items": {
+                  "$ref": "#/$defs/naming_long"
+                },
+                "uniqueItems": true
+              },
+              "negate":{
+                "type": "boolean",
+                "default": false
+              }
+            },
+            "additionalProperties": false
+          },
+          "forwarding": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string",
+                "default": "forward",
+                "enum": ["forward", "forward-to-vsys", "discard", "no-pbf"]
+              },
+              "vsys": {
+                "$ref": "#/$defs/naming"
+              },
+              "egress_interface": {
+                "$ref": "#/$defs/naming"
+              },
+              "next_hop_type": {
+                "type": "string",
+                "enum": ["ip-address", "fqdn"]
+              },
+              "next_hop_value": {
+                "$ref": "#/$defs/naming_long"
+              },
+              "monitor": {
+                "type": "object",
+                "properties": {
+                  "profile": {
+                    "$ref": "#/$defs/naming"
+                  },
+                  "ip_address": {
+                    "$ref": "#/$defs/naming_long"
+                  },
+                  "disable_if_unreachable": {
+                    "type": "boolean",
+                    "default": false
+                  }
+                },
+                "additionalProperties": false
+              },
+              "symmetric_return": {
+                "type": "object",
+                "properties": {
+                  "enable": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "addresses": {
+                    "type": "array",
+                    "default": ["any"],
+                    "items": {
+                      "$ref": "#/$defs/naming_long"
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "additionalProperties": false,
+            "oneOf": [
+              {
+                "properties": {"action": {"enum": ["forward"]}},
+                "required": ["egress_interface"]
+              },
+              {
+                "properties": {"action": {"enum": ["forward-to-vsys"]}},
+                "required": ["vsys"]
+              },
+              {
+                "properties": {"action": {"enum": ["discard", "no-pbf"]}}
+              }
+            ]
+          }
+        },
+        "required": ["name","source", "destination"],
+        "additionalProperties": false
+      }
+    }
+  },
+
+    "required": ["rules"],
+      "dependencies": {
+        "device_group": {
+          "not": {
+            "required": ["vsys"]
+          }
+        },
+        "vsys": {
+          "not": {
+            "required": ["device_group","target"]
+          }
+        },
+        "position_reference": {
+          "required": ["position_keyword"]
+        }
+      }
+  },
+  "uniqueItems": true,
+  "additionalItems": false,
+
+
+  "$defs": {
+    "naming": {
+      "type": "string",
+      "maxLength": 31,
+      "pattern": "^[a-zA-Z0-9_\\.\\s\\/-]+$"
+    },
+    "naming_long": {
+      "type": "string",
+      "maxLength": 63,
+      "pattern": "^[a-zA-Z0-9_\\.\\s\\/-]+$"
+    }
+  },
+  "additionalProperties": false
+}
