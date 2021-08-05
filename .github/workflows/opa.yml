@@ -106,11 +106,12 @@ jobs:
       with:
         tests: ./examples/validate/opa/panos.rego
         policy: ./examples/json_example/json/pbf.json #path to pbf policy file
-        - name: Print Results json example pbf
-          run: |
-            echo $opa_results | jq -r '.result[].expressions[].value'
-          env:
-            opa_results: ${{ steps.opa_eval_pbf.outputs.opa_results }}
+
+    - name: Print Results json example pbf
+      run: |
+        echo $opa_results | jq -r '.result[].expressions[].value'
+      env:
+        opa_results: ${{ steps.opa_eval_pbf.outputs.opa_results }}
 
     - name: Evaluate OPA json example w/sevices
       id: opa_eval_service
